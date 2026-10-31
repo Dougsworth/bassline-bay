@@ -352,12 +352,14 @@
       wrap.setAttribute("aria-hidden", "true");
       wrap.className = "ltrs";
       var count = text.replace(/\s/g, "").length, i = 0;
+      var word = null;
       text.split("").forEach(function (ch) {
-        if (ch === " ") { wrap.appendChild(document.createTextNode(" ")); return; }
+        if (ch === " ") { wrap.appendChild(document.createTextNode(" ")); word = null; return; }
+        if (!word) { word = document.createElement("span"); word.className = "lw"; wrap.appendChild(word); }
         var s = document.createElement("span");
         s.className = "ltr";
         s.textContent = ch;
-        wrap.appendChild(s);
+        word.appendChild(s);
         letters.push({ el: s, x: count > 1 ? i / (count - 1) : 0, row: ni, big: n.classList.contains("headliner") });
         i++;
       });
@@ -392,6 +394,53 @@
     function kick() { if (!raf && visible) raf = requestAnimationFrame(frame); }
     vibeBtn.addEventListener("click", function () { setTimeout(kick, 60); });
     setInterval(function () { if (bass.level > 0) kick(); }, 500);
+  })();
+
+  /* =========================================================
+     Statement: words light up one by one as the line scrolls
+     through the viewport, with a small slam as each lands.
+     While the vibe plays, newly lit words land on the beat.
+     ========================================================= */
+  (function statement() {
+    var line = document.querySelector("[data-statement]");
+    if (!line || reduceMotion) return;
+    var words = Array.prototype.slice.call(line.querySelectorAll(".sw"));
+    document.documentElement.classList.add("js-statement");
+    var lit = 0, raf = 0, active = false, wait = 0;
+    function target() {
+      var r = line.getBoundingClientRect(), vh = window.innerHeight;
+      /* start when the top is at 85% of the screen, finish when the bottom reaches 45% */
+      var p = (vh * .85 - r.top) / (vh * .85 - vh * .45 + r.height * .6);
+      return Math.max(0, Math.min(words.length, Math.round(p * words.length)));
+    }
+    function update() {
+      raf = 0;
+      var t = target();
+      if (t === lit) return;
+      /* on the vibe, release one word per frame tick only when the bass is up */
+      if (t > lit && bass.level > 0 && bass.level < .35 && wait++ < 24) { raf = requestAnimationFrame(update); return; }
+      wait = 0;
+      lit = t > lit ? Math.min(t, lit + 1) : t;
+      for (var i = 0; i < words.length; i++) words[i].classList.toggle("on", i < lit);
+      if (lit !== t) raf = requestAnimationFrame(update);
+    }
+    function onScroll() { if (active && !raf) raf = requestAnimationFrame(update); }
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (en) { active = en[0].isIntersecting; onScroll(); }, { rootMargin: "10% 0px" }).observe(line);
+    } else { active = true; }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    onScroll();
+  })();
+
+  /* the wave under "white sand" draws itself once it is on screen */
+  (function waveWord() {
+    var w = document.querySelector(".wave-word");
+    if (!w || reduceMotion || !("IntersectionObserver" in window)) return;
+    document.documentElement.classList.add("js-wave");
+    new IntersectionObserver(function (en, obs) {
+      if (en[0].isIntersecting) { w.classList.add("in"); obs.disconnect(); }
+    }, { threshold: 1 }).observe(w);
   })();
 
   /* ---------- Schedule ---------- */
