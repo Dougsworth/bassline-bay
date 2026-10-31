@@ -11,11 +11,13 @@
   <meta property="og:title" content="Bassline Bay 2027, Montego Bay, Jamaica">
   <meta property="og:description" content="Three nights of reggae, dancehall, afrobeats and soca on the beach. 22 to 24 July 2027.">
   <meta property="og:locale" content="en_JM">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&amp;fit=crop&amp;w=1200&amp;h=630&amp;q=80">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230E1A3A'/%3E%3Ccircle cx='32' cy='40' r='20' fill='%23FF5A1F'/%3E%3Crect x='0' y='30' width='64' height='3' fill='%230E1A3A'/%3E%3Crect x='0' y='36' width='64' height='4' fill='%230E1A3A'/%3E%3Crect x='0' y='40' width='64' height='24' fill='%230E1A3A'/%3E%3Cpath d='M8 48h48M14 54h36' stroke='%23F2D8A7' stroke-width='3'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -191,6 +193,12 @@
       </div>
     </section>
 
+    <!-- PHOTO BAND -->
+    <figure class="band" aria-labelledby="band-cap">
+      <img class="band-img" src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&amp;fit=crop&amp;w=1600&amp;q=80" srcset="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&amp;fit=crop&amp;w=800&amp;q=80 800w, https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&amp;fit=crop&amp;w=1200&amp;q=80 1200w, https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&amp;fit=crop&amp;w=1600&amp;q=80 1600w, https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&amp;fit=crop&amp;w=2400&amp;q=80 2400w" sizes="100vw" width="2400" height="1350" alt="A packed crowd faces a stage washed in white and orange light, hands up for the headliner" loading="lazy" decoding="async">
+      <figcaption class="wrap band-cap" id="band-cap">Saturday night at the Sunset Stage, Bassline Bay 2026</figcaption>
+    </figure>
+
     <!-- TICKETS -->
     <section class="tickets section" id="tickets" aria-labelledby="tickets-title">
       <div class="wrap">
@@ -201,6 +209,7 @@
 
         <div class="tiers">
           <article class="tier">
+            <img class="tier-img" src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&amp;fit=crop&amp;w=720&amp;q=80&amp;h=480" srcset="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&amp;fit=crop&amp;w=480&amp;q=80&amp;h=320 480w, https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&amp;fit=crop&amp;w=720&amp;q=80&amp;h=480 720w, https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&amp;fit=crop&amp;w=960&amp;q=80&amp;h=640 960w" sizes="(max-width: 900px) 100vw, 33vw" width="960" height="640" alt="A crowd with hands raised in front of the stage" loading="lazy" decoding="async">
             <h3 class="tier-name">General</h3>
             <p class="tier-price">JMD 24,000</p>
             <p class="tier-usd">About US$155 for all three nights</p>
@@ -211,10 +220,14 @@
               <li><svg aria-hidden="true"><use href="#i-check"/></svg>Free water refill points</li>
               <li><svg aria-hidden="true"><use href="#i-check"/></svg>Shuttle from the Hip Strip</li>
             </ul>
-            <button class="btn btn-line" type="button" data-open-checkout data-tier="general">Choose General</button>
+            <div class="stub" data-stub>
+              <button class="btn btn-line" type="button" data-open-checkout data-tier="general">Choose General</button>
+              <p class="stub-hint" aria-hidden="true">Or drag the stub sideways to tear it off</p>
+            </div>
           </article>
 
           <article class="tier tier-feature">
+            <img class="tier-img" src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&amp;fit=crop&amp;w=720&amp;q=80&amp;h=480" srcset="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&amp;fit=crop&amp;w=480&amp;q=80&amp;h=320 480w, https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&amp;fit=crop&amp;w=720&amp;q=80&amp;h=480 720w, https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&amp;fit=crop&amp;w=960&amp;q=80&amp;h=640 960w" sizes="(max-width: 900px) 100vw, 33vw" width="960" height="640" alt="A beam of stage light over the audience, seen from a raised viewing deck" loading="lazy" decoding="async">
             <p class="tier-flag">The one most people pick</p>
             <h3 class="tier-name">VIP</h3>
             <p class="tier-price">JMD 52,000</p>
@@ -226,10 +239,14 @@
               <li><svg aria-hidden="true"><use href="#i-check"/></svg>Express gate and private bar</li>
               <li><svg aria-hidden="true"><use href="#i-check"/></svg>Proper toilets, mirrors included</li>
             </ul>
-            <button class="btn btn-sun" type="button" data-open-checkout data-tier="vip">Choose VIP</button>
+            <div class="stub" data-stub>
+              <button class="btn btn-sun" type="button" data-open-checkout data-tier="vip">Choose VIP</button>
+              <p class="stub-hint" aria-hidden="true">Or drag the stub sideways to tear it off</p>
+            </div>
           </article>
 
           <article class="tier">
+            <img class="tier-img" src="https://images.unsplash.com/photo-1733596679766-3d8f63b30a75?auto=format&amp;fit=crop&amp;w=720&amp;q=80&amp;h=480" srcset="https://images.unsplash.com/photo-1733596679766-3d8f63b30a75?auto=format&amp;fit=crop&amp;w=480&amp;q=80&amp;h=320 480w, https://images.unsplash.com/photo-1733596679766-3d8f63b30a75?auto=format&amp;fit=crop&amp;w=720&amp;q=80&amp;h=480 720w, https://images.unsplash.com/photo-1733596679766-3d8f63b30a75?auto=format&amp;fit=crop&amp;w=960&amp;q=80&amp;h=640 960w" sizes="(max-width: 900px) 100vw, 33vw" width="960" height="640" alt="Palm trees in silhouette against an orange sunset over the water" loading="lazy" decoding="async">
             <h3 class="tier-name">Cabana</h3>
             <p class="tier-price">JMD 285,000</p>
             <p class="tier-usd">About US$1,840 for up to six guests</p>
@@ -240,10 +257,45 @@
               <li><svg aria-hidden="true"><use href="#i-check"/></svg>Dedicated host and bottle service</li>
               <li><svg aria-hidden="true"><use href="#i-check"/></svg>Reserved parking for one car</li>
             </ul>
-            <button class="btn btn-line" type="button" data-open-checkout data-tier="cabana">Choose Cabana</button>
+            <div class="stub" data-stub>
+              <button class="btn btn-line" type="button" data-open-checkout data-tier="cabana">Choose Cabana</button>
+              <p class="stub-hint" aria-hidden="true">Or drag the stub sideways to tear it off</p>
+            </div>
           </article>
         </div>
         <p class="fineprint">Over 18s only. Bring valid photo ID to the gate. You can transfer tickets in the festival app until 15 July 2027.</p>
+      </div>
+    </section>
+
+    <!-- LAST YEAR -->
+    <section class="gallery section" id="last-year" aria-labelledby="gallery-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 class="section-title" id="gallery-title">Last July on the sand</h2>
+          <p class="section-intro">Three nights, twelve thousand people and one very late sunrise. A few frames from Bassline Bay 2026.</p>
+        </div>
+        <div class="gallery-grid">
+          <figure class="g g-a">
+            <img src="https://images.unsplash.com/photo-1665035212282-3e117d618b36?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&amp;h=750" srcset="https://images.unsplash.com/photo-1665035212282-3e117d618b36?auto=format&amp;fit=crop&amp;w=800&amp;q=80&amp;h=500 800w, https://images.unsplash.com/photo-1665035212282-3e117d618b36?auto=format&amp;fit=crop&amp;w=1200&amp;q=80&amp;h=750 1200w, https://images.unsplash.com/photo-1665035212282-3e117d618b36?auto=format&amp;fit=crop&amp;w=1600&amp;q=80&amp;h=1000 1600w" sizes="(max-width: 640px) 100vw, 66vw" width="1600" height="1000" alt="Thousands of people fill the beach in front of the main stage after dark" loading="lazy" decoding="async">
+            <figcaption>Friday, the dancehall session at full stretch</figcaption>
+          </figure>
+          <figure class="g g-b">
+            <img src="https://images.unsplash.com/photo-1603910234616-3b5f4a6be2b4?auto=format&amp;fit=crop&amp;w=720&amp;q=80&amp;h=900" srcset="https://images.unsplash.com/photo-1603910234616-3b5f4a6be2b4?auto=format&amp;fit=crop&amp;w=480&amp;q=80&amp;h=600 480w, https://images.unsplash.com/photo-1603910234616-3b5f4a6be2b4?auto=format&amp;fit=crop&amp;w=720&amp;q=80&amp;h=900 720w, https://images.unsplash.com/photo-1603910234616-3b5f4a6be2b4?auto=format&amp;fit=crop&amp;w=960&amp;q=80&amp;h=1200 960w" sizes="(max-width: 640px) 100vw, 33vw" width="960" height="1200" alt="Silhouettes in the crowd under purple stage light" loading="lazy" decoding="async">
+            <figcaption>Reef Stage, a little after 1 AM</figcaption>
+          </figure>
+          <figure class="g g-c">
+            <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&amp;fit=crop&amp;w=720&amp;q=80&amp;h=540" srcset="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&amp;fit=crop&amp;w=480&amp;q=80&amp;h=360 480w, https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&amp;fit=crop&amp;w=720&amp;q=80&amp;h=540 720w, https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&amp;fit=crop&amp;w=960&amp;q=80&amp;h=720 960w" sizes="(max-width: 640px) 100vw, 33vw" width="960" height="720" alt="A band performing on stage with horns and guitars" loading="lazy" decoding="async">
+            <figcaption>Belmont Brass Collective on the Sunset Stage</figcaption>
+          </figure>
+          <figure class="g g-d">
+            <img src="https://images.unsplash.com/photo-1560358371-8460bf45a844?auto=format&amp;fit=crop&amp;w=720&amp;q=80&amp;h=540" srcset="https://images.unsplash.com/photo-1560358371-8460bf45a844?auto=format&amp;fit=crop&amp;w=480&amp;q=80&amp;h=360 480w, https://images.unsplash.com/photo-1560358371-8460bf45a844?auto=format&amp;fit=crop&amp;w=720&amp;q=80&amp;h=540 720w, https://images.unsplash.com/photo-1560358371-8460bf45a844?auto=format&amp;fit=crop&amp;w=960&amp;q=80&amp;h=720 960w" sizes="(max-width: 640px) 100vw, 33vw" width="960" height="720" alt="A cook turning jerk chicken on an outdoor grill" loading="lazy" decoding="async">
+            <figcaption>Jerk from the food village, all night</figcaption>
+          </figure>
+          <figure class="g g-e">
+            <img src="https://images.unsplash.com/photo-1672089468782-7ca3deffef84?auto=format&amp;fit=crop&amp;w=720&amp;q=80&amp;h=540" srcset="https://images.unsplash.com/photo-1672089468782-7ca3deffef84?auto=format&amp;fit=crop&amp;w=480&amp;q=80&amp;h=360 480w, https://images.unsplash.com/photo-1672089468782-7ca3deffef84?auto=format&amp;fit=crop&amp;w=720&amp;q=80&amp;h=540 720w, https://images.unsplash.com/photo-1672089468782-7ca3deffef84?auto=format&amp;fit=crop&amp;w=960&amp;q=80&amp;h=720 960w" sizes="(max-width: 640px) 100vw, 33vw" width="960" height="720" alt="The sun setting over the bay behind a moored boat" loading="lazy" decoding="async">
+            <figcaption>Gates open just in time for this</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
@@ -252,77 +304,35 @@
       <div class="wrap">
         <div class="section-head">
           <h2 class="section-title" id="venue-title">Getting to Coral Rest Beach</h2>
-          <p class="section-intro">A long curve of white sand just east of the Hip Strip, twelve minutes from the airport. Three stages, a food village under the almond trees and the Caribbean Sea doing what it does best.</p>
+          <p class="section-intro">Coral Rest Beach is our name for the stretch of Montego Bay waterfront between Walter Fletcher Beach and Pier 1 at the south end of the Hip Strip. Ten minutes from the airport, three stages, a food village under the almond trees and the Caribbean Sea doing what it does best.</p>
         </div>
 
         <div class="venue-grid">
           <figure class="map">
-            <svg viewBox="0 0 800 560" role="img" aria-labelledby="map-title map-desc">
-              <title id="map-title">Site map of Coral Rest Beach</title>
-              <desc id="map-desc">Stylised map showing the main gate by the coast road, the Sunset Stage on the beach, the Reef Stage near the water, the Yard Stage under the trees, the food village and the cabana row along the shoreline.</desc>
-              <defs>
-                <pattern id="seaLines" width="60" height="18" patternUnits="userSpaceOnUse">
-                  <path d="M0 9 Q 15 3 30 9 T 60 9" fill="none" stroke="#F2D8A7" stroke-opacity=".28" stroke-width="1.2"/>
-                </pattern>
-                <pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse">
-                  <circle cx="2" cy="2" r="1" fill="#0E1A3A" fill-opacity=".18"/>
-                </pattern>
-              </defs>
-              <rect width="800" height="560" fill="#F2D8A7"/>
-              <rect width="800" height="560" fill="url(#dots)"/>
-              <path d="M-10 60 C 200 40 420 80 810 50" fill="none" stroke="#0E1A3A" stroke-width="22"/>
-              <path d="M-10 60 C 200 40 420 80 810 50" fill="none" stroke="#F2D8A7" stroke-width="1.5" stroke-dasharray="14 12"/>
-              <text x="590" y="32" class="map-small">A1 coast road</text>
-              <g fill="#0E1A3A" fill-opacity=".85">
-                <circle cx="96" cy="150" r="16"/><circle cx="128" cy="138" r="12"/><circle cx="120" cy="172" r="13"/>
-                <circle cx="160" cy="190" r="11"/><circle cx="70" cy="186" r="12"/><circle cx="200" cy="140" r="10"/>
-                <circle cx="660" cy="150" r="14"/><circle cx="690" cy="170" r="11"/><circle cx="720" cy="142" r="12"/>
-              </g>
-              <path d="M0 400 C 120 360 220 420 340 390 S 560 340 680 380 S 780 400 800 390 V560 H0Z" fill="#0E1A3A"/>
-              <path d="M0 400 C 120 360 220 420 340 390 S 560 340 680 380 S 780 400 800 390 V560 H0Z" fill="url(#seaLines)"/>
-              <path d="M0 400 C 120 360 220 420 340 390 S 560 340 680 380 S 780 400 800 390" fill="none" stroke="#FAF4E8" stroke-width="2"/>
-              <text x="520" y="500" class="map-sea">Caribbean Sea</text>
-              <path d="M410 72 C 410 120 400 160 380 200" fill="none" stroke="#FF5A1F" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
-              <path d="M380 210 C 300 250 260 270 240 300" fill="none" stroke="#FF5A1F" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
-              <path d="M390 210 C 470 250 520 260 560 300" fill="none" stroke="#FF5A1F" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
-              <rect x="190" y="292" width="120" height="44" fill="#0E1A3A"/>
-              <text x="250" y="321" text-anchor="middle" class="map-label-inv">Sunset</text>
-              <rect x="520" y="300" width="96" height="38" fill="#0E1A3A"/>
-              <text x="568" y="326" text-anchor="middle" class="map-label-inv">Reef</text>
-              <rect x="88" y="214" width="84" height="34" fill="#0E1A3A"/>
-              <text x="130" y="238" text-anchor="middle" class="map-label-inv">Yard</text>
-              <g fill="none" stroke="#0E1A3A" stroke-width="2">
-                <rect x="430" y="140" width="34" height="22"/><rect x="472" y="140" width="34" height="22"/><rect x="514" y="140" width="34" height="22"/>
-                <rect x="451" y="170" width="34" height="22"/><rect x="493" y="170" width="34" height="22"/>
-              </g>
-              <g fill="#FAF4E8" stroke="#0E1A3A" stroke-width="2">
-                <path d="M650 352 l14 -14 l14 14z"/><path d="M684 356 l14 -14 l14 14z"/><path d="M718 360 l14 -14 l14 14z"/><path d="M752 364 l14 -14 l14 14z"/>
-              </g>
-              <rect x="388" y="84" width="44" height="16" fill="#FF5A1F"/>
-              <g class="pins">
-                <g transform="translate(410 122)"><circle r="15" fill="#FF5A1F"/><text y="5" text-anchor="middle">A</text></g>
-                <g transform="translate(250 268)"><circle r="15" fill="#FF5A1F"/><text y="5" text-anchor="middle">B</text></g>
-                <g transform="translate(640 300)"><circle r="15" fill="#FF5A1F"/><text y="5" text-anchor="middle">C</text></g>
-                <g transform="translate(196 230)"><circle r="15" fill="#FF5A1F"/><text y="5" text-anchor="middle">D</text></g>
-                <g transform="translate(489 116)"><circle r="15" fill="#FF5A1F"/><text y="5" text-anchor="middle">E</text></g>
-                <g transform="translate(714 316)"><circle r="15" fill="#FF5A1F"/><text y="5" text-anchor="middle">F</text></g>
-              </g>
-              <g transform="translate(60 470)" fill="#FAF4E8">
-                <path d="M0 -26 L 8 6 L 0 0 L -8 6 Z"/>
-                <text y="26" text-anchor="middle" class="map-small inv">N</text>
-              </g>
-            </svg>
-            <figcaption>Not to scale. The final site plan goes up in June 2027.</figcaption>
+            <div class="map-tools" role="group" aria-label="Map controls">
+              <button type="button" data-map="all">Whole site</button>
+              <button type="button" data-map="view" aria-pressed="false">Satellite view</button>
+              <a href="https://www.google.com/maps/dir/?api=1&amp;destination=18.4741,-77.9213&amp;travelmode=driving" target="_blank" rel="noopener">Directions to the main gate</a>
+            </div>
+            <div class="map-canvas" id="venue-map" role="region" aria-label="Interactive map of the festival site on the Montego Bay waterfront"></div>
+            <div class="map-fallback">
+              <p class="map-fallback-title">The map did not load.</p>
+              <p>The main gate is on Gloucester Avenue by Walter Fletcher Beach, at the south end of the Hip Strip in Montego Bay. <a href="https://www.openstreetmap.org/?mlat=18.4741&amp;mlon=-77.9213#map=17/18.4741/-77.9213" target="_blank" rel="noopener">Open it on OpenStreetMap</a> or use the directions link above.</p>
+            </div>
+            <p class="map-status" id="map-status" aria-live="polite"></p>
+            <figcaption>Real map of the Montego Bay waterfront. Festival positions are approximate until the final site plan goes up in June 2027. Map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors, satellite imagery &copy; Esri.</figcaption>
           </figure>
 
-          <ul class="legend" aria-label="Map key">
-            <li><span class="lg-n" aria-hidden="true">A</span><div><strong>Main gate and shuttle drop</strong><span>Wristband exchange, lockers and first aid</span></div></li>
-            <li><span class="lg-n" aria-hidden="true">B</span><div><strong>Sunset Stage</strong><span>The main stage, set right on the sand</span></div></li>
-            <li><span class="lg-n" aria-hidden="true">C</span><div><strong>Reef Stage</strong><span>Closest to the water, best for late sets</span></div></li>
-            <li><span class="lg-n" aria-hidden="true">D</span><div><strong>Yard Stage</strong><span>Sound system culture under the almond trees</span></div></li>
-            <li><span class="lg-n" aria-hidden="true">E</span><div><strong>Food village</strong><span>Jerk, fish, ital and a proper coffee bar</span></div></li>
-            <li><span class="lg-n" aria-hidden="true">F</span><div><strong>Cabana row</strong><span>Waterline cabanas and the VIP deck</span></div></li>
-          </ul>
+          <ol class="legend" aria-label="Map key. Choose a place to find it on the map">
+            <li><button type="button" class="pt" data-pt="A" aria-pressed="false"><span class="lg-n" aria-hidden="true">A</span><span class="pt-text"><strong>Main gate</strong><span>Wristband exchange, lockers and the shuttle drop</span></span></button></li>
+            <li><button type="button" class="pt" data-pt="B" aria-pressed="false"><span class="lg-n" aria-hidden="true">B</span><span class="pt-text"><strong>Sunset Stage</strong><span>The main stage, set right on the sand</span></span></button></li>
+            <li><button type="button" class="pt" data-pt="C" aria-pressed="false"><span class="lg-n" aria-hidden="true">C</span><span class="pt-text"><strong>Reef Stage</strong><span>Closest to the water, best for late sets</span></span></button></li>
+            <li><button type="button" class="pt" data-pt="D" aria-pressed="false"><span class="lg-n" aria-hidden="true">D</span><span class="pt-text"><strong>Yard Stage</strong><span>Sound system culture under the almond trees</span></span></button></li>
+            <li><button type="button" class="pt" data-pt="E" aria-pressed="false"><span class="lg-n" aria-hidden="true">E</span><span class="pt-text"><strong>Food village</strong><span>Jerk, fish, ital and a proper coffee bar</span></span></button></li>
+            <li><button type="button" class="pt" data-pt="F" aria-pressed="false"><span class="lg-n" aria-hidden="true">F</span><span class="pt-text"><strong>Cabana row</strong><span>Waterline cabanas and the VIP deck</span></span></button></li>
+            <li><button type="button" class="pt" data-pt="G" aria-pressed="false"><span class="lg-n" aria-hidden="true">G</span><span class="pt-text"><strong>Water taxi drop off</strong><span>Boats from the hotels along the bay</span></span></button></li>
+            <li><button type="button" class="pt" data-pt="H" aria-pressed="false"><span class="lg-n" aria-hidden="true">H</span><span class="pt-text"><strong>First aid</strong><span>Medics on site from gates until close</span></span></button></li>
+          </ol>
         </div>
 
         <div class="getting">
@@ -339,7 +349,7 @@
           <div class="get-item">
             <svg class="get-icon" aria-hidden="true"><use href="#i-car"/></svg>
             <h3>Driving</h3>
-            <p>Parking is limited and must be booked ahead for JMD 3,500 a night. Taxis and drivers have their own drop lane at the north gate.</p>
+            <p>Parking is limited and must be booked ahead for JMD 3,500 a night. Taxis and drivers have their own drop lane at the main gate on Gloucester Avenue.</p>
           </div>
         </div>
       </div>
@@ -503,5 +513,7 @@
   </dialog>
 
   <script src="assets/js/main.js" defer></script>
+  <script src="assets/vendor/leaflet/leaflet.js" defer></script>
+  <script src="assets/js/map.js" defer></script>
 </body>
 </html>

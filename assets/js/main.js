@@ -334,6 +334,66 @@
     if (on) audio.start(); else audio.stop();
   });
 
+  /* =========================================================
+     The poster dances: headliner letters ride the bass line.
+     Each name is split into letters that stretch upward in a
+     wave travelling across the word, driven by the analyser.
+     ========================================================= */
+  (function posterBass() {
+    if (reduceMotion) return;
+    var names = Array.prototype.slice.call(document.querySelectorAll(".headliner, .co-a"));
+    var letters = [];
+    names.forEach(function (n, ni) {
+      var text = n.textContent;
+      var sr = document.createElement("span");
+      sr.className = "visually-hidden";
+      sr.textContent = text;
+      var wrap = document.createElement("span");
+      wrap.setAttribute("aria-hidden", "true");
+      wrap.className = "ltrs";
+      var count = text.replace(/\s/g, "").length, i = 0;
+      text.split("").forEach(function (ch) {
+        if (ch === " ") { wrap.appendChild(document.createTextNode(" ")); return; }
+        var s = document.createElement("span");
+        s.className = "ltr";
+        s.textContent = ch;
+        wrap.appendChild(s);
+        letters.push({ el: s, x: count > 1 ? i / (count - 1) : 0, row: ni, big: n.classList.contains("headliner") });
+        i++;
+      });
+      n.textContent = "";
+      n.appendChild(sr);
+      n.appendChild(wrap);
+    });
+    if (!letters.length) return;
+
+    var poster = document.querySelector(".poster");
+    var visible = false, raf = 0, energy = 0, t0 = performance.now();
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (en) { visible = en[0].isIntersecting; kick(); }).observe(poster);
+    } else { visible = true; }
+
+    function frame(now) {
+      raf = 0;
+      var target = bass.level;
+      energy += (target - energy) * (target > energy ? .5 : .12);
+      var t = (now - t0) / 1000;
+      for (var i = 0; i < letters.length; i++) {
+        var L = letters[i];
+        /* a crest that sweeps left to right once per beat, offset per row */
+        var phase = t * 2.53 - L.x * 1.4 - L.row * .35;
+        var crest = Math.pow(.5 + .5 * Math.sin(phase * Math.PI * 2), 3);
+        var k = energy * (L.big ? .32 : .22) * (.35 + .65 * crest);
+        L.el.style.transform = k > .002 ? "scale(" + (1 - k * .18).toFixed(4) + "," + (1 + k).toFixed(4) + ")" : "";
+      }
+      if (visible && (bass.level > 0 || energy > .002)) raf = requestAnimationFrame(frame);
+      else if (energy <= .002) letters.forEach(function (L) { L.el.style.transform = ""; });
+    }
+    function kick() { if (!raf && visible) raf = requestAnimationFrame(frame); }
+    vibeBtn.addEventListener("click", function () { setTimeout(kick, 60); });
+    setInterval(function () { if (bass.level > 0) kick(); }, 500);
+  })();
+
   /* ---------- Schedule ---------- */
   var schedule = {
     thu: { label: "Thursday 22 July", sets: [
@@ -509,6 +569,73 @@
     b.addEventListener("click", closeCheckout);
   });
   coForm.addEventListener("change", function (e) { if (e.target.name === "tier") updateTotals(); });
+  /* ---------- Tear off the ticket stub ----------
+     Drag the stub sideways past the perforation and it tears away,
+     then opens checkout for that pass. A plain click still works. */
+  document.querySelectorAll("[data-stub]").forEach(function (stub) {
+    if (reduceMotion || !window.PointerEvent) return;
+    var btn = stub.querySelector("[data-open-checkout]");
+    var startX = 0, startY = 0, dx = 0, id = null, dragging = false, swallow = false, raf = 0;
+    var TEAR = Math.min(140, stub.offsetWidth * .4 || 120);
+
+    function paint() {
+      raf = 0;
+      var pull = Math.abs(dx);
+      /* paper resists until the perforation gives */
+      var eased = pull < TEAR ? pull * (1 - pull / (TEAR * 2.6)) : pull;
+      var dir = dx < 0 ? -1 : 1;
+      stub.style.transform = "translate3d(" + (dir * eased).toFixed(1) + "px," + (pull * .06).toFixed(1) + "px,0) rotate(" + (dir * eased * .05).toFixed(2) + "deg)";
+      stub.style.setProperty("--strain", Math.min(1, pull / TEAR).toFixed(3));
+    }
+    function reset(animated) {
+      stub.classList.toggle("settle", !!animated);
+      stub.style.transform = "";
+      stub.style.setProperty("--strain", 0);
+    }
+    stub.addEventListener("pointerdown", function (e) {
+      if (e.button !== 0 || stub.classList.contains("torn")) return;
+      id = e.pointerId; startX = e.clientX; startY = e.clientY; dx = 0; dragging = false;
+      stub.classList.remove("settle");
+    });
+    stub.addEventListener("pointermove", function (e) {
+      if (e.pointerId !== id) return;
+      var mx = e.clientX - startX, my = e.clientY - startY;
+      if (!dragging) {
+        if (Math.abs(mx) < 8) return;
+        if (Math.abs(my) > Math.abs(mx)) { id = null; return; } /* a vertical scroll, let it go */
+        dragging = true;
+        stub.setPointerCapture(id);
+        stub.classList.add("pulling");
+      }
+      dx = mx;
+      if (!raf) raf = requestAnimationFrame(paint);
+    });
+    function end(e) {
+      if (e.pointerId !== id) return;
+      id = null;
+      if (!dragging) return;
+      dragging = false; swallow = true;
+      stub.classList.remove("pulling");
+      setTimeout(function () { swallow = false; }, 0);
+      if (Math.abs(dx) >= TEAR) {
+        var dir = dx < 0 ? -1 : 1;
+        stub.classList.add("torn");
+        stub.style.transform = "translate3d(" + (dir * (Math.abs(dx) + 220)) + "px,90px,0) rotate(" + (dir * 18) + "deg)";
+        setTimeout(function () { openCheckout(btn.dataset.tier, btn); }, 260);
+        setTimeout(function () {
+          stub.classList.remove("torn"); stub.classList.add("reprint");
+          reset(false);
+          setTimeout(function () { stub.classList.remove("reprint"); }, 500);
+        }, 900);
+      } else {
+        reset(true);
+      }
+    }
+    stub.addEventListener("pointerup", end);
+    stub.addEventListener("pointercancel", function (e) { if (e.pointerId === id) { id = null; dragging = false; stub.classList.remove("pulling"); reset(true); } });
+    btn.addEventListener("click", function (e) { if (swallow) { e.stopImmediatePropagation(); e.preventDefault(); } }, true);
+  });
+
   [stepDown, stepUp].forEach(function (b) {
     b.addEventListener("click", function () { qty = Math.max(1, qty + Number(b.dataset.step)); updateTotals(); });
   });
